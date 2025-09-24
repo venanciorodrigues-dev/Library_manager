@@ -5,21 +5,20 @@ Rails.application.routes.draw do
   root "home#index"
 
   # Páginas privadas
-  get "dashboard", to: "dashboard#index"
+  get "dashboard", to: "dashboard#index", as: :dashboard
   get "settings", to: "settings#index", as: :settings
 
   # CRUD de livros
   resources :books do
     member do
       patch :borrow
-      patch :return   # <= precisa estar aqui
+      patch :return   # rota para devolver livro
     end
 
     collection do
       get :borrowed
     end
   end
-
 
   # Empréstimos
   resources :loans do
